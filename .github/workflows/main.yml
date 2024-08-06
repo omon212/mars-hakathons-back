@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-      -
+      - another-branch # Specify the other branch here or remove if not needed
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
