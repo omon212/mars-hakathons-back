@@ -21,7 +21,7 @@ class HomeModel(models.Model):
 
 class ElectronicItem(models.Model):
     item = models.CharField(choices=ELECTRONIC_CHOICES, max_length=50)
-    related_home = models.ForeignKey('HomeModel', related_name='related_home', on_delete=models.CASCADE)
+    related_home = models.ForeignKey(HomeModel, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.item)
@@ -35,6 +35,7 @@ def validate_file_extension(value):
 
 
 class ReportModel(models.Model):
+    report = models.ForeignKey(HomeModel, on_delete=models.CASCADE)
     report_type = models.CharField(choices=REPORT_CHOICES, max_length=50)
     report_description = models.CharField(max_length=100)
     report_file = models.FileField(upload_to='uploads/', validators=[validate_file_extension])

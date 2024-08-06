@@ -35,8 +35,18 @@ class CreateElectronic(APIView):
             return Response({'message': 'Home not found'}, status=404)
 
 
-# class ReportCreate(APIView):
-#     @swagger_auto_schema(request_body=ReportSerializer)
-#     def post(self, request):
-#         serializer = ReportSerializer(data=request.data)
-#         if serializer
+class ReportCreate(APIView):
+    @swagger_auto_schema(request_body=ReportSerializer)
+    def post(self, request):
+        serializer = ReportSerializer(data=request.data)
+        if serializer.is_valid():
+            home = HomeModel.objects.get(id=serializer.validated_data['report'])
+            if home:
+                ReportModel.objects.create(report=home, report_type=serializer.validated_data['report_type'],
+                                           report_description=serializer.validated_data['report_description'],
+                                           report_file=serializer.validated_data['report_file'])
+                return Response({'message': 'Report created successfully'}, status=200)
+            else:
+                return Response({'message': 'Home not found'}, status=404)
+        else:
+            return Response({'message': 'Invalid data'}, status=500)

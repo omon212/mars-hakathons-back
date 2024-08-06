@@ -8,7 +8,7 @@ class ElectrItemSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class ReportSerializer(Serializer):
+class ReportSerializer(ModelSerializer):
     class Meta:
         model = ReportModel
         fields = '__all__'
