@@ -11,32 +11,12 @@ class CreateElectronic(APIView):
     def post(self, request):
         item = request.data.get('item')
         related_home = request.data.get('related_home')
-        try:
-            home = HomeModel.objects.get(id=related_home)
+        home = HomeModel.objects.get(id=related_home)
+        if home:
             ElectronicItem.objects.create(item=item, related_home=home)
-
-            home_items_list = ElectronicItem.objects.filter(related_home=home)
-            list_items = []
-            for i in home_items_list:
-                list_items.append(i.item)
-            home_per_hour = 0
-            home_1_day = 0
-
-            for i in list_items:
-                home_per_hour += 1 * energy_consumption_per_hour[i]
-                home_1_day += daily_usage_hours[i] * energy_consumption_per_hour[i]
-            home_30_days = home_1_day * 30
-            home_7_days = home_1_day * 7
-            home_1_year = home_1_day * 365
-            print(home_per_hour)
-            print(home_1_day)
-            print(home_7_days)
-            print(home_30_days)
-            print(home_1_year)
-
-            return Response({'message': 'Electronic item added successfully'}, status=200)
-        except:
-            return Response({'message': 'Home not found'}, status=404)
+            return Response({"message": "Electronic Added"})
+        else:
+            return Response({"error": "Home Not Found"})
 
 
 class ReportCreate(APIView):
