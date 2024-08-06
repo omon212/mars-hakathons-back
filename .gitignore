@@ -7,8 +7,6 @@ Bot/.env
 
 staticfiles/
 static/
+Calculator/migrations/0001_initial.py
 
-UserApp/migrations/*
-Calculator/migrations/*
-DeviceApp/migrations/*
 db.sqlite3

@@ -1,14 +1,18 @@
-from rest_framework.serializers import ModelSerializer, Serializer
+from rest_framework import serializers
 from .models import ElectronicItem, ReportModel
 
 
-class ElectrItemSerializer(ModelSerializer):
+class ElectrItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = ElectronicItem
         fields = '__all__'
 
 
-class ReportSerializer(ModelSerializer):
+class ReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReportModel
         fields = '__all__'
+
+
+class DeleteReportSerializer(serializers.Serializer):
+    report = serializers.IntegerField()

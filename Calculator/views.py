@@ -50,3 +50,18 @@ class ReportCreate(APIView):
                 return Response({'message': 'Home not found'}, status=404)
         else:
             return Response({'message': 'Invalid data'}, status=500)
+
+
+class ReportDelete(APIView):
+    @swagger_auto_schema(request_body=DeleteReportSerializer)
+    def post(self, request):
+        serializer = DeleteReportSerializer(data=request.data)
+        if serializer.is_valid():
+            report = ReportModel.objects.get(id=serializer.validated_data['report'])
+            if report:
+                report.delete()
+                return Response({'message': 'Report deleted successfully'}, status=200)
+            else:
+                return Response({'message': 'Report not found'}, status=404)
+        else:
+            return Response({'message': 'Invalid data'}, status=500)
