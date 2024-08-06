@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - ./staticfiles:/code/staticfiles
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+
+  bot:
+    build:
+      context: .
+      dockerfile: bot/Dockerfile
+    volumes:
+      - ./bot:/bot
+      - ./.env:/bot/.env
+    env_file:
+      - .env
+    command: python app.py
+
+volumes:
+  static_volume:

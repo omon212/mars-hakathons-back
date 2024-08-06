@@ -1,0 +1,14 @@
+venv/
+.venv/
+env/
+
+.env
+Bot/.env
+
+staticfiles/
+static/
+
+UserApp/migrations/*
+Calculator/migrations/*
+DeviceApp/migrations/*
+db.sqlite3
