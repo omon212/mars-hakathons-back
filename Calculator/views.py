@@ -54,7 +54,7 @@ class ReportCreate(APIView):
 
 class ReportDelete(APIView):
     @swagger_auto_schema(request_body=DeleteReportSerializer)
-    def post(self, request):
+    def delete(self, request):
         serializer = DeleteReportSerializer(data=request.data)
         if serializer.is_valid():
             report = ReportModel.objects.get(id=serializer.validated_data['report'])
