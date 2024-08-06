@@ -42,3 +42,5 @@ class ReportModel(models.Model):
 
     def __str__(self):
         return str(self.report_description)
+
+
