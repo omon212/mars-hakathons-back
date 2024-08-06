@@ -41,4 +41,4 @@ class ReportModel(models.Model):
     report_file = models.FileField(upload_to='uploads/', validators=[validate_file_extension])
 
     def __str__(self):
-        return self.report_description
+        return str(self.report_description)
