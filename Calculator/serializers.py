@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import ElectronicItem, ReportModel
 
 
-class ElectrItemSerializer(serializers.Serializer):
+class ElectrItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = ElectronicItem
         fields = "__all__"
