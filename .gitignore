@@ -5,6 +5,7 @@ env/
 .env
 Bot/.env
 
+uploads/
 staticfiles/
 static/
 Calculator/migrations/0001_initial.py
