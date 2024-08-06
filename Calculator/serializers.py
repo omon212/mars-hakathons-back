@@ -3,9 +3,9 @@ from .models import ElectronicItem, ReportModel
 
 
 class ElectrItemSerializer(serializers.Serializer):
-    item = serializers.CharField()
-    related_home = serializers.IntegerField()
-
+    class Meta:
+        model = ElectronicItem
+        fields = "__all__"
 
 
 class ReportSerializer(serializers.ModelSerializer):
