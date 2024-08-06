@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework.parsers import MultiPartParser
 from .serializers import *
 from .models import *
 
@@ -39,13 +40,16 @@ class CreateElectronic(APIView):
 
 
 class ReportCreate(APIView):
+    parser_classes = [MultiPartParser]
+
     @swagger_auto_schema(request_body=ReportSerializer)
     def post(self, request):
         serializer = ReportSerializer(data=request.data)
+        home = request.data.get('home')
         if serializer.is_valid():
-            home = HomeModel.objects.get(id=serializer.validated_data['report'])
+            homes = HomeModel.objects.get(id=home)
             if home:
-                ReportModel.objects.create(report=home, report_type=serializer.validated_data['report_type'],
+                ReportModel.objects.create(home=homes, report_type=serializer.validated_data['report_type'],
                                            report_description=serializer.validated_data['report_description'],
                                            report_file=serializer.validated_data['report_file'])
                 return Response({'message': 'Report created successfully'}, status=200)
@@ -77,4 +81,3 @@ class ElectronicsGetView(APIView):
         if not serializer.data:
             return Response({'message': 'No electronic items found'}, status=404)
         return Response(serializer.data)
-

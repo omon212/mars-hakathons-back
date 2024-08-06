@@ -35,7 +35,7 @@ def validate_file_extension(value):
 
 
 class ReportModel(models.Model):
-    report = models.ForeignKey(HomeModel, on_delete=models.CASCADE)
+    home = models.ForeignKey(HomeModel, on_delete=models.CASCADE)
     report_type = models.CharField(choices=REPORT_CHOICES, max_length=50)
     report_description = models.CharField(max_length=100)
     report_file = models.FileField(upload_to='uploads/', validators=[validate_file_extension])

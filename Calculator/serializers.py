@@ -11,7 +11,7 @@ class ElectrItemSerializer(serializers.ModelSerializer):
 class ReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReportModel
-        fields = '__all__'
+        fields = ['home', 'report_type', 'report_description', 'report_file']
 
 
 class DeleteReportSerializer(serializers.Serializer):
