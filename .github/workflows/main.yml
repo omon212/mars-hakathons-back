@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - another-branch # Specify the other branch here or remove if not needed
 
 jobs:
   deploy:
@@ -32,3 +31,5 @@ jobs:
             python manage.py collectstatic --noinput
             sudo supervisorctl restart api.mars
             mkdir -p WorkedWorkflow
+            
+            
