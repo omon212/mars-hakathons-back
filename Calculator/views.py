@@ -13,7 +13,7 @@ class CreateElectronic(APIView):
         related_home = request.data.get('related_home')
         home = HomeModel.objects.get(id=related_home)
         if home:
-            ElectronicItem.objects.create(item=item, related_home=home)
+            a = ElectronicItem.objects.create(item=item, related_home=home)
             return Response({"message": "Electronic Added"})
         else:
             return Response({"error": "Home Not Found"})
